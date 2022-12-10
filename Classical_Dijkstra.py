@@ -80,7 +80,6 @@ def evaluate_Q1(sample_input1):
     avg_runtime = 1
     graph_object = None
     try:
-        from Q1 import Dij_generator, Q1_dijkstra
         graph_object = Dij_generator()
         start_time = time()
         candidate_output = [round(Q1_dijkstra(source, destination, graph_object)) for source, destination in sample_input1]
