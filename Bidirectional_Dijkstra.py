@@ -1,4 +1,5 @@
 import heapq
+from time import time
 
 class Graph:
     def __init__(self):             # initializes the graph with incoming and outgoing nodes
@@ -177,3 +178,34 @@ def bidirectional_dij(source: int, destination: int, graph_object) -> int:
     except:
         return shortest_path_distance
 
+
+def evaluate_Q2(sample_input1, graph_object):
+    try:
+        candidate_output = [round(bidirectional_dij(source, destination, graph_object)) for source, destination in sample_input1]
+        if candidate_output == output_Q1Q2:
+            print("\n\nOur output: ", candidate_output)
+            print("Output verified. Shortest paths match the manually found weights.\n\n")
+    except:
+        pass
+    return None
+
+
+def main():
+    avg_runtime = 1
+    start_time = time()
+    print("\n\nRunning Bidirectional Dijkstra Algorithm.")
+    evaluate_Q2(node_pairs, graph_object)
+    avg_runtime = avg_runtime + (time() - start_time) / len(node_pairs)
+    print(f"Avg Runtime in seconds for Bidirectional Dijkstra: {avg_runtime}\n\n")
+
+
+
+
+if __name__ == "__main__":
+    from classical_dijkstra import Dij_generator
+    graph_object = Dij_generator()
+    node_pairs = [(253, 127), (139, 305), (148, 99), (363, 134), (778, 396), (650, 759), (724, 547), (788, 412), (105, 1)]
+    output_Q1Q2 = [38, 59, 29, 76, 30, 70, 53, 59, 51]
+    print("\n\n(Initial node, terminal node) pairs: ", node_pairs)
+    print("\n\nRequired shortest distances from initial node and terminal node.", output_Q1Q2)
+    main()
