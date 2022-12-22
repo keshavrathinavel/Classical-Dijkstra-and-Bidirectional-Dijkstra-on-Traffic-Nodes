@@ -76,30 +76,32 @@ graph_object = Dij_generator()
 
 
 def evaluate_Q1(sample_input1):
-    marks = 0
     avg_runtime = 1
     graph_object = None
     try:
+        from classical_dijkstra import Dij_generator, Q1_dijkstra
         graph_object = Dij_generator()
+        print("\n\n",graph_object)
         start_time = time()
-        candidate_output = [round(Q1_dijkstra(source, destination, graph_object)) for source, destination in sample_input1]
+        candidate_output = [round(Q1_dijkstra(source, destination, graph_object)) for source, destination in node_pairs]
         print(candidate_output)
         avg_runtime = avg_runtime + (time() - start_time) / len(sample_input1)
         if candidate_output == output_Q1Q2:
-            print("Output verified. Source to destination is same as manually calculated.")
+            print("\n\nOutput verified. Source to destination is same as manually calculated.\n\n")
     except:
         pass
     return graph_object, avg_runtime
 
+
 def main():
-    print("Running Unidirectional Dijkstra: ")
-    graph_object, avg_runtime = evaluate_Q1(input_Q1Q2)
-    print(f"Avg Runtime in seconds for Q1: {avg_runtime}")
+    print("\n\nRunning Unidirectional Dijkstra: ")
+    graph_object, avg_runtime = evaluate_Q1(node_pairs)
+    print(f"Avg Runtime in seconds for Q1: {avg_runtime}\n\n")
 
 
 if __name__ == "__main__":
-    input_Q1Q2 = [(253, 127), (139, 305), (148, 99), (363, 134), (778, 396), (650, 759), (724, 547), (788, 412), (105, 1)]
+    node_pairs = [(253, 127), (139, 305), (148, 99), (363, 134), (778, 396), (650, 759), (724, 547), (788, 412), (105, 1)]
     output_Q1Q2 = [38, 59, 29, 76, 30, 70, 53, 59, 51]
-    output3 = [2, 1, 0, 0, 1, 1]
-    marksQ1, marksQ2, marksQ3 = 2, 4, 4
+    print("\n\n(Initial node, terminal node) pairs: ", node_pairs)
+    print("\n\nRequired shortest distances from initial node and terminal node.", output_Q1Q2)
     main()
